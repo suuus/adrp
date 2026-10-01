@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/suuus/ape-context/schemas/ape-decision-source-v1.schema.json",
+  "title": "Ape Decision Source Metadata 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "record_id",
+    "record_version",
+    "source_uri",
+    "snapshot_path",
+    "retrieved_at",
+    "last_checked_at",
+    "record_fingerprint",
+    "source_digest",
+    "source_etag",
+    "assessment",
+    "local_disposition",
+    "acceptance_basis",
+    "accepted_by",
+    "scope_confirmed",
+    "authority_accepted"
+  ],
+  "properties": {
+    "schema_version": {"const": "ape-decision-source/v1"},
+    "decision_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9-]{2,63}$"},
+    "record_id": {"type": "string", "format": "uuid"},
+    "record_version": {"type": "integer", "minimum": 1},
+    "source_uri": {"type": "string", "minLength": 1},
+    "snapshot_path": {"type": "string", "minLength": 1},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "last_checked_at": {"type": "string", "format": "date-time"},
+    "record_fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source_etag": {"type": ["string", "null"]},
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["as_of", "eligibility", "reasons"],
+      "properties": {
+        "as_of": {"type": "string", "format": "date-time"},
+        "eligibility": {
+          "enum": [
+            "eligible",
+            "inactive",
+            "not_yet_effective",
+            "expired",
+            "review_required",
+            "authority_review_required"
+          ]
+        },
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "local_disposition": {
+      "enum": ["accepted", "needs_review", "inactive"]
+    },
+    "acceptance_basis": {"type": ["string", "null"]},
+    "accepted_by": {"type": ["string", "null"]},
+    "scope_confirmed": {"type": "boolean"},
+    "authority_accepted": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "local_disposition": {"const": "accepted"}
+        },
+        "required": ["local_disposition"]
+      },
+      "then": {
+        "properties": {
+          "acceptance_basis": {"type": "string", "minLength": 1},
+          "accepted_by": {"type": "string", "minLength": 1},
+          "scope_confirmed": {"const": true},
+          "authority_accepted": {"const": true},
+          "assessment": {
+            "properties": {
+              "eligibility": {"const": "eligible"}
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "acceptance_basis": {"type": "null"},
+          "accepted_by": {"type": "null"}
+        }
+      }
+    }
+  ]
+}

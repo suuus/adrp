@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "adrp"
+version = "0.1.0"
+description = "Deterministic tools and agent workflows for the Ape Decision Record Profile"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Suzanne Daniels" }
+]
+keywords = [
+  "agents",
+  "decision-records",
+  "intent",
+  "governance",
+  "provenance",
+  "policy-as-code"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Quality Assurance"
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/suuus/adrp"
+Repository = "https://github.com/suuus/adrp"
+Issues = "https://github.com/suuus/adrp/issues"
+
+[project.scripts]
+adrp = "adrp.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/adrp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

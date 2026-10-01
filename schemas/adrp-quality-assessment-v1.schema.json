@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/suuus/adrp/schemas/adrp-quality-assessment-v1.schema.json",
+  "title": "ADRP CAFE(S) Quality Assessment 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "target",
+    "stage",
+    "assessed_at",
+    "assessor",
+    "dimensions",
+    "overall",
+    "standing_effect",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "adrp-quality-assessment/v1"
+    },
+    "assessment_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "uri",
+        "record_id",
+        "fingerprint"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "source",
+            "intent",
+            "record",
+            "projection"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "fingerprint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "stage": {
+      "enum": [
+        "source-intake",
+        "intent-fitness",
+        "record-fitness",
+        "projection-fitness"
+      ]
+    },
+    "assessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assessor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "person",
+            "organisation",
+            "software-agent",
+            "model"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clarity",
+        "actionability",
+        "fidelity",
+        "efficiency",
+        "security"
+      ],
+      "properties": {
+        "clarity": {
+          "$ref": "#/$defs/dimension"
+        },
+        "actionability": {
+          "$ref": "#/$defs/dimension"
+        },
+        "fidelity": {
+          "$ref": "#/$defs/dimension"
+        },
+        "efficiency": {
+          "$ref": "#/$defs/dimension"
+        },
+        "security": {
+          "$ref": "#/$defs/dimension"
+        }
+      }
+    },
+    "overall": {
+      "enum": [
+        "pass",
+        "pass_with_warnings",
+        "block",
+        "incomplete"
+      ]
+    },
+    "standing_effect": {
+      "const": "none"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "summary",
+        "evidence_refs",
+        "findings"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pass",
+            "warn",
+            "block",
+            "not_assessed"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "severity",
+              "statement",
+              "remediation"
+            ],
+            "properties": {
+              "severity": {
+                "enum": [
+                  "info",
+                  "warning",
+                  "blocker"
+                ]
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1
+              },
+              "remediation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

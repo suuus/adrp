@@ -1,0 +1,70 @@
+{
+  "schema_version": "adrp-quality-assessment/v1",
+  "assessment_id": "78f20f48-b4e8-45e5-a127-b89126763af5",
+  "target": {
+    "type": "source",
+    "uri": "sharepoint://security/policy/production-deployment",
+    "record_id": null,
+    "fingerprint": null
+  },
+  "stage": "source-intake",
+  "assessed_at": "2026-10-01T20:00:00Z",
+  "assessor": {
+    "id": "agent-adrp-quality",
+    "type": "software-agent",
+    "name": "ADRP Quality Skill"
+  },
+  "dimensions": {
+    "clarity": {
+      "status": "pass",
+      "summary": "The source states the production security gate in direct and unambiguous language.",
+      "evidence_refs": [
+        "section:production-deployment"
+      ],
+      "findings": []
+    },
+    "actionability": {
+      "status": "pass",
+      "summary": "The source identifies a blocking condition and the required review outcome.",
+      "evidence_refs": [
+        "section:production-deployment"
+      ],
+      "findings": []
+    },
+    "fidelity": {
+      "status": "warn",
+      "summary": "The source location is known, but the named policy owner has not yet been independently confirmed.",
+      "evidence_refs": [
+        "sharepoint://security/policy/production-deployment"
+      ],
+      "findings": [
+        {
+          "severity": "warning",
+          "statement": "Source ownership remains unconfirmed.",
+          "remediation": "Confirm the policy owner and authority delegation before treating the source as authoritative."
+        }
+      ]
+    },
+    "efficiency": {
+      "status": "pass",
+      "summary": "The relevant security requirement can be isolated without copying unrelated policy material.",
+      "evidence_refs": [
+        "section:production-deployment"
+      ],
+      "findings": []
+    },
+    "security": {
+      "status": "pass",
+      "summary": "The extracted requirement contains no secrets or unnecessary personal information.",
+      "evidence_refs": [
+        "section:production-deployment"
+      ],
+      "findings": []
+    }
+  },
+  "overall": "pass_with_warnings",
+  "standing_effect": "none",
+  "notes": [
+    "A CAFE(S) pass does not establish source authority or local applicability."
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": "ape-decision-record/v1",
+  "decision_id": "ADR-SECURITY-GATE",
+  "record_id": "849535a2-fb8d-4a59-a9ea-d01ff9b7b460",
+  "record_version": 1,
+  "status": "draft",
+  "title": "Require security review before production deployment",
+  "decision_statement": "Every production deployment requires a passing security gate.",
+  "context": {
+    "problem": "Agents can otherwise deploy changes without the security review required by production policy.",
+    "scope": [
+      "production deployments"
+    ],
+    "stakeholders": [
+      "platform engineering",
+      "security",
+      "service owners"
+    ],
+    "concerns": [
+      "security",
+      "delivery speed",
+      "audit evidence"
+    ]
+  },
+  "drivers": [
+    {
+      "name": "Mandatory production review",
+      "category": "security",
+      "criterion": "Block deployment until security findings are resolved or an authorised person accepts the residual risk.",
+      "source_refs": [
+        "src-production-security-policy"
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "blocking-gate",
+      "title": "Blocking security gate",
+      "description": "Security analysis must pass before a production deployment can continue.",
+      "benefits": [
+        "Prevents deployment with unresolved blocking findings",
+        "Creates evidence of pre-deployment review"
+      ],
+      "drawbacks": [
+        "May delay releases while findings are remediated"
+      ],
+      "rejection_reason": null
+    },
+    {
+      "id": "advisory-only",
+      "title": "Advisory security review",
+      "description": "Report findings without preventing deployment.",
+      "benefits": [
+        "Does not add a blocking step to delivery"
+      ],
+      "drawbacks": [
+        "Known security findings may reach production",
+        "Does not enforce the production security policy"
+      ],
+      "rejection_reason": "The authoritative policy requires security review before production deployment."
+    }
+  ],
+  "selected_alternative": "blocking-gate",
+  "rationale": "A blocking gate is the only considered alternative that enforces the authoritative production security policy while preserving an explicit human path for residual-risk acceptance.",
+  "tradeoffs": {
+    "security": {
+      "impact": "positive",
+      "summary": "Production changes with unresolved blocking findings cannot be deployed.",
+      "evidence_refs": [
+        "src-production-security-policy"
+      ],
+      "accepted_risks": [
+        "The analyzer may not detect every security defect"
+      ]
+    },
+    "cost": {
+      "impact": "mixed",
+      "summary": "Review and remediation consume engineering time but reduce the expected cost of preventable incidents.",
+      "evidence_refs": [],
+      "accepted_risks": [
+        "Additional review and remediation cost"
+      ]
+    },
+    "compliance": {
+      "impact": "positive",
+      "summary": "The gate creates durable evidence that a security review occurred before production deployment.",
+      "evidence_refs": [
+        "src-production-security-policy"
+      ],
+      "accepted_risks": []
+    },
+    "operations": {
+      "impact": "mixed",
+      "summary": "The deployment path gains a reliable control but may experience longer lead time when findings require remediation.",
+      "evidence_refs": [],
+      "accepted_risks": [
+        "Longer deployment lead time"
+      ]
+    }
+  },
+  "authority": {
+    "authority_status": "authoritative",
+    "decision_owner": "Security",
+    "deciders": [
+      "Platform Engineering Lead"
+    ],
+    "approvers": [],
+    "delegation_ref": "policy://security/delegations/production-risk"
+  },
+  "provenance": {
+    "sources": [
+      {
+        "id": "src-production-security-policy",
+        "uri": "sharepoint://security/policy/production-deployment",
+        "title": "Production Security Policy",
+        "authority_status": "authoritative",
+        "digest": null
+      }
+    ],
+    "activities": [
+      {
+        "id": "activity-extract-1",
+        "type": "extraction",
+        "timestamp": "2026-10-01T08:00:00Z",
+        "used": [
+          "src-production-security-policy"
+        ],
+        "associated_agents": [
+          "agent-adrp"
+        ]
+      }
+    ],
+    "agents": [
+      {
+        "id": "agent-adrp",
+        "type": "software-agent",
+        "name": "ADRP Agent",
+        "role": "decision draft generator",
+        "acted_on_behalf_of": null
+      }
+    ]
+  },
+  "lifecycle": {
+    "created_at": "2026-10-01T08:00:00Z",
+    "effective_at": null,
+    "review_by": "2027-10-01T00:00:00Z",
+    "expires_at": null,
+    "review_triggers": [
+      "production security policy changes",
+      "security analyzer changes",
+      "deployment authority changes",
+      "residual-risk acceptance process changes"
+    ]
+  },
+  "consequences": {
+    "positive": [
+      "Security review becomes structurally unavoidable",
+      "Production review evidence is retained"
+    ],
+    "negative": [
+      "Deployments may wait for remediation or residual-risk review"
+    ],
+    "risks": [
+      "False positive findings may delay a deployment",
+      "The analyzer may provide incomplete coverage"
+    ],
+    "actions": [
+      "Implement the blocking security gate",
+      "Retain analyzer output and residual-risk decisions",
+      "Document the authorised risk-acceptance path"
+    ]
+  },
+  "implementation": {
+    "policy_refs": [
+      "policy/security-gate"
+    ],
+    "artifact_refs": [
+      ".github/copilot-instructions.md",
+      ".github/workflows/production-deploy.yml"
+    ],
+    "evidence_refs": [
+      "evidence/security-analysis",
+      "evidence/deployment-approval"
+    ]
+  },
+  "relationships": {
+    "revises": null,
+    "supersedes": null,
+    "invalidates": null,
+    "implements": [
+      "INTENT-SAFE-PRODUCTION-CHANGE"
+    ],
+    "depends_on": []
+  },
+  "autonomy": {
+    "proceed": [
+      "Run read-only security analysis against a proposed production deployment"
+    ],
+    "always_ask": [
+      "Accept or waive a residual production security finding"
+    ],
+    "never": [
+      "Deploy to production while a blocking security finding remains unresolved"
+    ]
+  },
+  "gaps": [
+    "Named human approver for residual-risk acceptance has not yet been supplied"
+  ],
+  "ratification": null
+}

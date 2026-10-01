@@ -1,0 +1,23 @@
+{
+  "name": "adrp",
+  "description": "Write, read, validate, import, resolve, ratify, and monitor Ape Decision Record Profile records.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Suzanne Daniels",
+    "url": "https://github.com/suuus/adrp"
+  },
+  "homepage": "https://github.com/suuus/adrp",
+  "repository": "https://github.com/suuus/adrp",
+  "license": "MIT",
+  "keywords": [
+    "decision-records",
+    "intent",
+    "agents",
+    "governance",
+    "provenance",
+    "context-quality",
+    "policy-as-code"
+  ],
+  "agents": ".github/agents/",
+  "skills": ".github/skills/"
+}
