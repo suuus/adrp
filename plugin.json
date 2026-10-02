@@ -1,6 +1,6 @@
 {
   "name": "adrp",
-  "description": "Write, read, validate, import, resolve, ratify, and monitor Ape Decision Record Profile records.",
+  "description": "Record and resolve the Intent layer of ISEE with human-ratified Ape Decision Record Profile records.",
   "version": "0.1.0",
   "author": {
     "name": "Suzanne Daniels",
@@ -12,6 +12,7 @@
   "keywords": [
     "decision-records",
     "intent",
+    "isee",
     "agents",
     "governance",
     "provenance",

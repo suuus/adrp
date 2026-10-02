@@ -5,16 +5,15 @@
     "url": "https://github.com/suuus/adrp"
   },
   "metadata": {
-    "description": "Ape Decision Record Profile agent and deterministic CLI for decision-bearing intent.",
+    "description": "The deterministic ADRP Intent record layer for the ISEE Framework.",
     "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "adrp",
-      "description": "Write, read, validate, import, resolve, ratify, and monitor decision-bearing intent.",
+      "description": "Record and resolve decision-bearing Intent for the ISEE Framework.",
       "version": "0.1.0",
       "source": "."
     }
   ]
 }
-

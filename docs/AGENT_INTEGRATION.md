@@ -4,6 +4,17 @@
 
 ADRP separates semantic work from deterministic record processing.
 
+In the ISEE Framework, this agent owns the **Intent** boundary:
+
+```text
+Intent             Structure            Execution            Evidence
+ADRP record   →     referenced      →    consuming agent  →    AERP record
+and resolution      architecture          or system             or bundle
+```
+
+Agents must carry the exact ADRP identity and fingerprint across the later
+stages. A paraphrased instruction is not an adequate decision binding.
+
 ```text
 Agent
   -> selects and orchestrates a skill
@@ -228,6 +239,54 @@ When a record materially shapes an action, retain:
 
 This can be attached to a plan, pull request, policy decision, audit event, or
 agent trace.
+
+## AERP evidence handoff
+
+When an active ADRP record materially shapes an execution:
+
+1. run `adrp resolve` for the exact scope;
+2. retain the canonical record file selected in `active`;
+3. give Structure and Execution systems the decision identity, version, and
+   fingerprint;
+4. capture the resulting artifact or assessment with AERP;
+5. pass the canonical ADRP file to AERP using `--decision` or `aerp bind`;
+6. verify the AERP record and its referenced artifact bytes;
+7. route material failure or drift back into ADRP review.
+
+Example:
+
+```bash
+adrp resolve .github/decisions \
+  --scope "production deployments" \
+  --as-of "2026-10-02T12:00:00Z"
+
+aerp new \
+  --type assessment \
+  --subject "production deployment security gate" \
+  --claim "The deployment passed the required security gate" \
+  --result passed \
+  --summary "The configured security gate completed without blocking findings." \
+  --producer "security-gate" \
+  --producer-version "1.0.0" \
+  --identity "github-actions:org/repo/.github/workflows/deploy.yml" \
+  --method "security-gate" \
+  --method-version "1" \
+  --environment production \
+  --target "deployment:deploy-20261002-103000" \
+  --decision .github/decisions/ADR-SECURITY-GATE/v001.json \
+  --artifact reports/security-gate.json \
+  --artifact-root . \
+  --artifact-role report \
+  --output evidence/security-gate.json
+
+aerp verify evidence/security-gate.json --artifact-root .
+```
+
+The AERP binding proves which exact Intent record the evidence refers to. It
+does not itself prove that the ADRP record was active or authoritative; ADRP
+resolution remains the source of that standing.
+
+See [ADRP and AERP in ISEE](ISEE_INTEGRATION.md) for complete setup.
 
 ## Safety invariants
 

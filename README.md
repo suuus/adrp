@@ -1,10 +1,11 @@
-# ADRP
+# ADRP — Ape Decision Record Profile
 
-> Record decision-bearing intent so humans and agents can use it safely.
+> The durable Intent record layer for the ISEE Framework.
 
 The **Ape Decision Record Profile (ADRP)** is a human-ratified,
 machine-readable standard for organisational and technical decisions that shape
-agent behaviour.
+agent behaviour. ADRP is the durable **Intent** record layer of the
+**ISEE Framework: Intent → Structure → Execution → Evidence**.
 
 ADRP records more than the final choice. It preserves:
 
@@ -40,6 +41,34 @@ software can inspect.
 Every recorded decision expresses intent, but not every expression of intent is
 a decision. Goals, facts, constraints, and recommendations should remain sourced
 intent unless a meaningful choice has actually been made.
+
+## ADRP in the ISEE Framework
+
+ISEE treats agentic work as a closed governance loop:
+
+```text
+Intent       ADRP records the decision, authority, scope, trade-offs,
+             autonomy boundaries, lifecycle, and expected evidence.
+    ↓
+Structure    Architecture, ownership, policy, controls, and agent boundaries
+             are linked from the active ADRP records.
+    ↓
+Execution    Agents and delivery systems consume the resolved records and
+             retain the exact ADRP fingerprints that shaped the action.
+    ↓
+Evidence     AERP binds observations, assessments, approvals, execution
+             artifacts, outcomes, and drift back to those fingerprints.
+    ↺
+Review       Material evidence triggers ADRP review, supersession, or revocation.
+```
+
+ADRP does not attempt to own Structure, Execution, or Evidence. It makes the
+Intent needed by those layers explicit and addressable. The companion
+[Ape Evidence Record Profile](https://github.com/suuus/aerp) provides the
+Evidence record layer.
+
+See [Setting up ADRP with AERP for ISEE](docs/ISEE_INTEGRATION.md) for the
+end-to-end repository layout, commands, agent handoff, and CI pattern.
 
 ## Install the CLI
 
@@ -138,6 +167,8 @@ An unmatched action is `UNRESOLVED`; the CLI does not invent permission.
 - [Valid security-gate example](docs/examples/ADR-SECURITY-GATE.v1.json).
 - [Agent integration](docs/AGENT_INTEGRATION.md) - how agents and skills use the
   deterministic CLI.
+- [ISEE integration with AERP](docs/ISEE_INTEGRATION.md) - connect ratified
+  Intent to execution Evidence and close the review loop.
 - [CAFE(S) quality gates](docs/QUALITY.md) - source-intake and intent-fitness
   assessment without conflating quality with authority.
 

@@ -7,6 +7,19 @@ record for organisational and technical decisions that shape agent behaviour.
 It is an application profile, not a claim of conformance to one universal
 decision-record standard.
 
+ADRP is the durable **Intent** record layer of the **ISEE Framework**:
+
+```text
+Intent → Structure → Execution → Evidence
+  ADRP                              AERP
+```
+
+ADRP identifies what was decided, why, by whom, for which scope, with which
+trade-offs and autonomy boundaries, and what evidence should confirm or
+challenge the decision. It does not prescribe one Structure or Execution
+system. Those systems bind their actions to exact ADRP fingerprints, while the
+Ape Evidence Record Profile (AERP) records the resulting Evidence.
+
 The profile combines:
 
 - MADR-style context, alternatives, drivers, rationale, and consequences;
@@ -18,13 +31,16 @@ The profile combines:
 - references to OSCAL, DMN, OPA, Cedar, OpenTelemetry, SPDX, CycloneDX, GSN, or
   SACM artifacts where those standards apply.
 
-No external standard adequately combines authority, cost, security, compliance,
-autonomy, ratification, executable policy, runtime evidence, and drift. Those
-cross-domain fields are defined by this profile.
+No external decision-record standard adequately combines authority, cost,
+security, compliance, autonomy, ratification, executable-policy references,
+expected evidence, and drift triggers. ADRP defines those Intent fields. AERP
+defines the resulting Evidence records and artifact bindings.
 
 For a practical, human-friendly guide to deciding what belongs in a record and
 how people and agents should write, read, import, resolve, and apply records, see
 [Recording Intent with Ape Decision Records](RECORDING_INTENT.md).
+For the handoff between ADRP Intent and AERP Evidence, see
+[ADRP and AERP in ISEE](ISEE_INTEGRATION.md).
 
 ## Canonical and rendered forms
 

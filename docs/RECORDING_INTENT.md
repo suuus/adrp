@@ -32,6 +32,13 @@ ADRP is not merely a nicer Architecture Decision Record. It is a
 human-ratified, machine-readable record of a choice that carries organisational
 intent into agent behaviour.
 
+Within the **ISEE Framework — Intent → Structure → Execution → Evidence**,
+ADRP is the durable Intent record layer. It provides the stable decision
+identity and fingerprint that Structure and Execution systems consume. The
+companion Ape Evidence Record Profile (AERP) binds resulting observations,
+assessments, approvals, artifacts, outcomes, and drift back to that exact
+Intent.
+
 This guide explains how people and agents should create, interpret, adopt, use,
 review, and retire those records. The normative field definitions and lifecycle
 rules remain in the
@@ -56,6 +63,8 @@ rules remain in the
   [lifecycle and drift](#13-lifecycle-drift-and-renewal),
   [security and privacy](#14-security-and-privacy-rules), and
   [agent processing checklist](#16-agent-processing-checklist) sections.
+- **If you want a complete ISEE loop**, follow
+  [Setting up ADRP with AERP](ISEE_INTEGRATION.md).
 
 ### Contents
 

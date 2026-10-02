@@ -2,6 +2,12 @@
 
 All notable changes to ADRP will be documented here.
 
+## Unreleased
+
+- Position ADRP as the durable Intent record layer of the ISEE Framework.
+- Document the fingerprint-preserving handoff from ADRP Intent to AERP Evidence.
+- Add an end-to-end ADRP and AERP setup guide.
+
 ## 0.1.0 - 2026-10-01
 
 ### Added

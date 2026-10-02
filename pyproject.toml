@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "adrp"
 version = "0.1.0"
-description = "Deterministic tools and agent workflows for the Ape Decision Record Profile"
+description = "The deterministic Intent record layer for the ISEE Framework"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
@@ -16,6 +16,7 @@ keywords = [
   "agents",
   "decision-records",
   "intent",
+  "isee",
   "governance",
   "provenance",
   "policy-as-code"
@@ -44,4 +45,3 @@ packages = ["src/adrp"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
