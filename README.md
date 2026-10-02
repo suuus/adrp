@@ -51,7 +51,7 @@ Intent       ADRP records the decision, authority, scope, trade-offs,
              autonomy boundaries, lifecycle, and expected evidence.
     ↓
 Structure    Architecture, ownership, policy, controls, and agent boundaries
-             are linked from the active ADRP records.
+             are recorded by ASRP and linked to active ADRP fingerprints.
     ↓
 Execution    Agents and delivery systems consume the resolved records and
              retain the exact ADRP fingerprints that shaped the action.
@@ -64,6 +64,8 @@ Review       Material evidence triggers ADRP review, supersession, or revocation
 
 ADRP does not attempt to own Structure, Execution, or Evidence. It makes the
 Intent needed by those layers explicit and addressable. The companion
+[Ape Structure Record Profile](https://github.com/suuus/asrp) provides the
+Structure record layer, while the
 [Ape Evidence Record Profile](https://github.com/suuus/aerp) provides the
 Evidence record layer.
 

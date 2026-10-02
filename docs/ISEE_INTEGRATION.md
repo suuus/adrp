@@ -15,7 +15,7 @@ either end:
 | ISEE layer | Primary concern | Record or system |
 |---|---|---|
 | Intent | What was decided, why, by whom, where it applies, and what agents may do | ADRP |
-| Structure | Architecture, ownership, controls, policy, workflows, and agent boundaries | Referenced implementation artifacts |
+| Structure | Architecture, ownership, controls, policy, workflows, and agent boundaries | ASRP and referenced implementation artifacts |
 | Execution | The action performed by agents, CI/CD, platforms, or people | Git-Ape or another execution system |
 | Evidence | What was observed, assessed, approved, executed, produced, or found to have drifted | AERP |
 
@@ -115,7 +115,7 @@ adrp resolve .github/decisions \
 The orchestrator MUST retain the canonical files and fingerprints returned as
 active. An ID or natural-language summary alone is insufficient.
 
-### 3. Structure: materialise the decision
+### 3. Structure: materialise the decision with ASRP
 
 Structure artifacts may include:
 
@@ -129,6 +129,21 @@ Structure artifacts may include:
 Reference these from ADRP `implementation` fields. Structure artifacts should
 also retain the relevant ADRP fingerprints in generated metadata, plans, pull
 requests, or manifests.
+
+Canonical Structure can be recorded and compiled with
+[ASRP](https://github.com/suuus/asrp):
+
+```bash
+asrp bind-intent \
+  .github/structures/drafts/STR-PRODUCTION-DEPLOYMENT.json \
+  .github/decisions/ADR-SECURITY-GATE/v001.json \
+  --output .github/structures/STR-PRODUCTION-DEPLOYMENT/v001.json
+
+asrp compile .github/structures \
+  --scope "production deployments" \
+  --entry-point production-deployment \
+  --output .github/isee/execution-manifest.json
+```
 
 ### 4. Execution: consume the resolved Intent
 
