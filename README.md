@@ -7,6 +7,9 @@ machine-readable standard for organisational and technical decisions that shape
 agent behaviour. ADRP is the durable **Intent** record layer of the
 **ISEE Framework: Intent → Structure → Execution → Evidence**.
 
+Learn more about the operating framework at
+[agentile.org](https://agentile.org).
+
 ADRP records more than the final choice. It preserves:
 
 - scope, stakeholders, concerns, and decision drivers;
@@ -72,7 +75,27 @@ Evidence record layer.
 See [Setting up ADRP with AERP for ISEE](docs/ISEE_INTEGRATION.md) for the
 end-to-end repository layout, commands, agent handoff, and CI pattern.
 
-## Install the CLI
+## Install with GitHub Copilot
+
+The recommended installation is the complete
+[ISEE plugin suite](https://github.com/suuus/isee-plugins):
+
+```bash
+copilot plugin marketplace add suuus/isee-plugins
+copilot plugin install isee-suite@isee
+```
+
+This loads the ADRP agent and skills together with ASRP, AERP, ISEE
+integration, ISEE Advisor, and setup guidance. To install only ADRP:
+
+```bash
+copilot plugin install adrp@isee
+```
+
+Plugin installation loads the Copilot agent and skills. Use `isee-setup` from
+the complete suite to install or diagnose the deterministic CLIs explicitly.
+
+## Install the CLI from a checkout
 
 From a checkout:
 
@@ -195,6 +218,10 @@ ADRP Agent -> ADRP Skills -> adrp CLI -> ADRP artifacts
 Agents interpret and interact. The CLI validates, fingerprints, resolves, and
 writes immutable artifacts. Skills must not reproduce deterministic operations
 through prompt-only logic.
+
+For normal use, install this plugin through the
+[ISEE marketplace](https://github.com/suuus/isee-plugins) rather than copying
+agent and skill files manually.
 
 ## Development
 

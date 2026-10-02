@@ -8,6 +8,8 @@ The **ISEE Framework** governs agentic work as a closed loop:
 Intent → Structure → Execution → Evidence
 ```
 
+Framework overview: [agentile.org](https://agentile.org).
+
 [ADRP](https://github.com/suuus/adrp) and
 [AERP](https://github.com/suuus/aerp) provide the durable record layers at
 either end:
@@ -26,7 +28,17 @@ ADRP and AERP are intentionally separate:
 - Structure and Execution systems remain replaceable.
 - Evidence can challenge Intent, but cannot silently rewrite it.
 
-## Install both tools
+## Install the complete Copilot suite
+
+```bash
+copilot plugin marketplace add suuus/isee-plugins
+copilot plugin install isee-suite@isee
+```
+
+The suite provides ADRP, ASRP, AERP, ISEE integration, and ISEE Advisor agents
+and skills. Ask `isee-setup` to install or diagnose the deterministic CLIs.
+
+## Install from sibling checkouts for development
 
 From sibling checkouts:
 
